@@ -12,19 +12,6 @@ export default function UGCContent() {
   interface UGCItem {
     id: number;
     category: string;
-    image: string;
-    user: string;
-    caption: string;
-    likes: number;
-    comments: number;
-    platform: string;
-    role?: string;
-    result?: string;
-  }
-
-  interface UGCItem {
-    id: number;
-    category: string;
     videoUrl?: string;
     embedCode?: string;
     image?: string;

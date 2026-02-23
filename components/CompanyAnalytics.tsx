@@ -408,7 +408,7 @@ export default function CompanyAnalytics() {
                 Campaign Duration
               </div>
               <div className="text-3xl font-bold">
-                {'timeframe' in currentData.metrics ? currentData.metrics.timeframe : '6-7 Months'}
+                {(currentData.metrics as any).timeframe || '6-7 Months'}
               </div>
             </div>
           </div>

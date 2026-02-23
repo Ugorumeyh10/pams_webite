@@ -115,7 +115,7 @@ export default function SocialMedia() {
                 <div className={`relative h-48 ${handle.color} flex items-center justify-center`}>
                   <IconComponent className="w-20 h-20 text-white opacity-80" />
                   <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">
-                    <span className="text-white font-semibold">{handle.followers}</span>
+                    <span className="text-white font-semibold">{handle.platform}</span>
                   </div>
                 </div>
 
