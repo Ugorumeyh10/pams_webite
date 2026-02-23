@@ -22,11 +22,27 @@ export default function UGCContent() {
     result?: string;
   }
 
+  interface UGCItem {
+    id: number;
+    category: string;
+    videoUrl?: string;
+    embedCode?: string;
+    image?: string;
+    user: string;
+    caption: string;
+    likes: number;
+    comments: number;
+    platform: string;
+    role?: string;
+    result?: string;
+  }
+
   const ugcContent: UGCItem[] = [
     {
       id: 1,
       category: 'scripted',
-      image: '/images/ornamap/Image (1).jpeg',
+      videoUrl: 'https://www.instagram.com/reel/DQZAr-wDNcx/',
+      embedCode: 'DQZAr-wDNcx',
       user: 'OrnaMap Campaign',
       caption: 'Feature storytelling reel showcasing StrollAI capabilities',
       likes: 1245,
@@ -38,19 +54,21 @@ export default function UGCContent() {
     {
       id: 2,
       category: 'educational',
-      image: '/images/payzip/Image (10).jpeg',
+      videoUrl: 'https://drive.google.com/file/d/1yOR2Dy8BxkD34HX8YXSx5J0rJHwuJEVA/view',
+      embedCode: '1yOR2Dy8BxkD34HX8YXSx5J0rJHwuJEVA',
       user: 'Payzeep Educational',
       caption: 'How-to guide: Setting up payment solutions for your business',
       likes: 892,
       comments: 45,
-      platform: 'LinkedIn',
+      platform: 'Google Drive',
       role: 'Script & Content Direction by Me',
       result: 'Achieved 28K views, increased lead generation by 40%',
     },
     {
       id: 3,
       category: 'campaign',
-      image: '/images/handchow/Image (17).jpeg',
+      videoUrl: 'https://www.instagram.com/reel/DR4Ofp5CCPT/',
+      embedCode: 'DR4Ofp5CCPT',
       user: 'HandChow Campaign',
       caption: 'Brand positioning video showcasing product benefits',
       likes: 2156,
@@ -62,7 +80,8 @@ export default function UGCContent() {
     {
       id: 4,
       category: 'scripted',
-      image: '/images/ornamap/Image (2).jpeg',
+      videoUrl: 'https://www.instagram.com/reel/DH29cCzIIVG/',
+      embedCode: 'DH29cCzIIVG',
       user: 'OrnaMap Feature',
       caption: 'Wallet feature launch video with user testimonials',
       likes: 1890,
@@ -74,12 +93,13 @@ export default function UGCContent() {
     {
       id: 5,
       category: 'educational',
-      image: '/images/payzip/Image (11).jpeg',
+      videoUrl: 'https://www.instagram.com/reel/DDuILQjIiWD/',
+      embedCode: 'DDuILQjIiWD',
       user: 'Payzeep Tutorial',
       caption: 'Step-by-step guide to using Payzeep for merchants',
       likes: 567,
       comments: 32,
-      platform: 'YouTube',
+      platform: 'Instagram',
       role: 'Script & Content Direction by Me',
       result: 'Achieved 15K views, improved user onboarding by 30%',
     },
@@ -170,14 +190,56 @@ export default function UGCContent() {
                   className="absolute inset-0"
                 >
                   <div className="relative w-full h-full">
-                    <Image
-                      src={filteredContent[currentIndex].image}
-                      alt={filteredContent[currentIndex].caption}
-                      fill
-                      className="object-cover"
-                      unoptimized
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    {filteredContent[currentIndex].videoUrl ? (
+                      <div className="w-full h-full flex items-center justify-center bg-black">
+                        {filteredContent[currentIndex].platform === 'Instagram' ? (
+                          <iframe
+                            src={`https://www.instagram.com/reel/${filteredContent[currentIndex].embedCode}/embed/`}
+                            className="w-full h-full"
+                            frameBorder="0"
+                            scrolling="no"
+                            allowTransparency
+                            allow="encrypted-media"
+                          ></iframe>
+                        ) : filteredContent[currentIndex].platform === 'Google Drive' ? (
+                          <iframe
+                            src={`https://drive.google.com/file/d/${filteredContent[currentIndex].embedCode}/preview`}
+                            className="w-full h-full"
+                            frameBorder="0"
+                            allow="autoplay"
+                          ></iframe>
+                        ) : (
+                          <a
+                            href={filteredContent[currentIndex].videoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white text-xl hover:underline p-8"
+                          >
+                            Watch Video on {filteredContent[currentIndex].platform} →
+                          </a>
+                        )}
+                      </div>
+                    ) : filteredContent[currentIndex].image ? (
+                      <Image
+                        src={filteredContent[currentIndex].image}
+                        alt={filteredContent[currentIndex].caption}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+                        <a
+                          href={filteredContent[currentIndex].videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-white text-xl hover:underline"
+                        >
+                          Watch Video →
+                        </a>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
                       <div className="flex items-center gap-3 mb-3">
                         <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
@@ -274,13 +336,19 @@ export default function UGCContent() {
               className="relative h-32 md:h-40 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity"
               onClick={() => setCurrentIndex(filteredContent.findIndex((c) => c.id === item.id))}
             >
-              <Image
-                src={item.image}
-                alt={item.caption}
-                fill
-                className="object-cover"
-                unoptimized
-              />
+              {item.image ? (
+                <Image
+                  src={item.image}
+                  alt={item.caption}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-beige-400 to-beige-600 flex items-center justify-center text-white font-semibold">
+                  Video
+                </div>
+              )}
               <div className="absolute inset-0 bg-black/20 hover:bg-black/10 transition-colors"></div>
             </motion.div>
           ))}
