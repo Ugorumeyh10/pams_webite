@@ -43,6 +43,7 @@ export default function UGCContent() {
       category: 'scripted',
       videoUrl: 'https://www.instagram.com/reel/DQZAr-wDNcx/',
       embedCode: 'DQZAr-wDNcx',
+      image: '/images/ornamap/Image (1).jpeg',
       user: 'OrnaMap Campaign',
       caption: 'Feature storytelling reel showcasing StrollAI capabilities',
       likes: 1245,
@@ -56,6 +57,7 @@ export default function UGCContent() {
       category: 'educational',
       videoUrl: 'https://drive.google.com/file/d/1yOR2Dy8BxkD34HX8YXSx5J0rJHwuJEVA/view',
       embedCode: '1yOR2Dy8BxkD34HX8YXSx5J0rJHwuJEVA',
+      image: '/images/payzip/Image (10).jpeg',
       user: 'Payzeep Educational',
       caption: 'How-to guide: Setting up payment solutions for your business',
       likes: 892,
@@ -69,6 +71,7 @@ export default function UGCContent() {
       category: 'campaign',
       videoUrl: 'https://www.instagram.com/reel/DR4Ofp5CCPT/',
       embedCode: 'DR4Ofp5CCPT',
+      image: '/images/handchow/Image (17).jpeg',
       user: 'HandChow Campaign',
       caption: 'Brand positioning video showcasing product benefits',
       likes: 2156,
@@ -82,6 +85,7 @@ export default function UGCContent() {
       category: 'scripted',
       videoUrl: 'https://www.instagram.com/reel/DH29cCzIIVG/',
       embedCode: 'DH29cCzIIVG',
+      image: '/images/ornamap/Image (2).jpeg',
       user: 'OrnaMap Feature',
       caption: 'Wallet feature launch video with user testimonials',
       likes: 1890,
@@ -95,6 +99,7 @@ export default function UGCContent() {
       category: 'educational',
       videoUrl: 'https://www.instagram.com/reel/DDuILQjIiWD/',
       embedCode: 'DDuILQjIiWD',
+      image: '/images/payzip/Image (11).jpeg',
       user: 'Payzeep Tutorial',
       caption: 'Step-by-step guide to using Payzeep for merchants',
       likes: 567,
@@ -106,12 +111,14 @@ export default function UGCContent() {
     {
       id: 6,
       category: 'campaign',
+      videoUrl: 'https://drive.google.com/file/d/1bsfP_s3iSAXJAYiDyw8A-LuRUXITLzqC/view',
+      embedCode: '1bsfP_s3iSAXJAYiDyw8A-LuRUXITLzqC',
       image: '/images/handchow/Image (18).jpeg',
-      user: 'HandChow UGC',
+      user: 'HandChow Campaign Video',
       caption: 'User-generated content campaign showcasing real experiences',
       likes: 3421,
       comments: 234,
-      platform: 'TikTok',
+      platform: 'Google Drive',
       role: 'Creative Direction / Publishing Strategy',
       result: 'Achieved 250K views, increased engagement by 45%',
     },
@@ -189,57 +196,62 @@ export default function UGCContent() {
                   transition={{ duration: 0.5 }}
                   className="absolute inset-0"
                 >
-                  <div className="relative w-full h-full">
-                    {filteredContent[currentIndex].videoUrl ? (
-                      <div className="w-full h-full flex items-center justify-center bg-black">
-                        {filteredContent[currentIndex].platform === 'Instagram' ? (
-                          <iframe
-                            src={`https://www.instagram.com/reel/${filteredContent[currentIndex].embedCode}/embed/`}
-                            className="w-full h-full"
-                            frameBorder="0"
-                            scrolling="no"
-                            allowTransparency
-                            allow="encrypted-media"
-                          ></iframe>
-                        ) : filteredContent[currentIndex].platform === 'Google Drive' ? (
-                          <iframe
-                            src={`https://drive.google.com/file/d/${filteredContent[currentIndex].embedCode}/preview`}
-                            className="w-full h-full"
-                            frameBorder="0"
-                            allow="autoplay"
-                          ></iframe>
-                        ) : (
-                          <a
-                            href={filteredContent[currentIndex].videoUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-white text-xl hover:underline p-8"
-                          >
-                            Watch Video on {filteredContent[currentIndex].platform} →
-                          </a>
-                        )}
-                      </div>
-                    ) : filteredContent[currentIndex].image ? (
-                      <Image
-                        src={filteredContent[currentIndex].image}
-                        alt={filteredContent[currentIndex].caption}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+                  <div className="relative w-full h-full group cursor-pointer">
+                    {filteredContent[currentIndex].image ? (
+                      <>
+                        <Image
+                          src={filteredContent[currentIndex].image}
+                          alt={filteredContent[currentIndex].caption}
+                          fill
+                          className="object-cover transition-transform group-hover:scale-105"
+                          unoptimized
+                        />
+                        {/* Clickable overlay */}
                         <a
                           href={filteredContent[currentIndex].videoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-white text-xl hover:underline"
+                          className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-all z-20"
+                          onClick={(e) => e.stopPropagation()}
                         >
-                          Watch Video →
+                          <div className="bg-white/90 backdrop-blur-sm rounded-full p-6 group-hover:scale-110 transition-transform">
+                            <svg
+                              className="w-16 h-16 text-beige-700"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                          <div className="absolute bottom-4 left-4 right-4">
+                            <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg text-center">
+                              <p className="text-sm font-semibold text-gray-900">Click to Watch</p>
+                              <p className="text-xs text-gray-600">{filteredContent[currentIndex].platform}</p>
+                            </div>
+                          </div>
+                        </a>
+                      </>
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-beige-400 to-beige-600 flex items-center justify-center">
+                        <a
+                          href={filteredContent[currentIndex].videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="bg-white/90 backdrop-blur-sm rounded-full p-8 hover:scale-110 transition-transform text-center"
+                        >
+                          <svg
+                            className="w-20 h-20 text-beige-700 mx-auto mb-4"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                          <p className="text-lg font-semibold text-gray-900">Watch Video</p>
+                          <p className="text-sm text-gray-600">{filteredContent[currentIndex].platform}</p>
                         </a>
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none z-10"></div>
                     <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
                       <div className="flex items-center gap-3 mb-3">
                         <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
