@@ -3,6 +3,7 @@ import About from '@/components/About';
 import CoreBrands from '@/components/CoreBrands';
 import ProductShowcase from '@/components/ProductShowcase';
 import UGCContent from '@/components/UGCContent';
+import ContentStrategy from '@/components/ContentStrategy';
 import StrategySnapshot from '@/components/StrategySnapshot';
 import Skills from '@/components/Skills';
 import Experience from '@/components/Experience';
@@ -21,6 +22,7 @@ export default function Home() {
       <CoreBrands />
       <ProductShowcase />
       <UGCContent />
+      <ContentStrategy />
       <StrategySnapshot />
       <Skills />
       <Experience />

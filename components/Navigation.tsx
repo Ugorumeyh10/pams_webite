@@ -21,6 +21,7 @@ export default function Navigation() {
     { name: 'Brands', href: '#brands' },
     { name: 'Products', href: '#products' },
     { name: 'Videos', href: '#ugc' },
+    { name: 'Content Strategy', href: '#content-strategy' },
     { name: 'Strategy', href: '#strategy' },
     { name: 'Analytics', href: '#analytics' },
     { name: 'Contact', href: '#contact' },
